@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">StudentSQLDemo</string>
+    <string name="activity_name">Register Student</string>
+    <string name="name">Name</string>
+    <string name="major">Major</string>
+    <string name="year">Grad. Year</string>
+</resources>
