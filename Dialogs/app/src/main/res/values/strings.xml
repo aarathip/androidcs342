@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Dialogs</string>
+    <string name="alert_btn">Open Alert Dialog</string>
+    <string name="camera_btn">Open Camera</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
+
