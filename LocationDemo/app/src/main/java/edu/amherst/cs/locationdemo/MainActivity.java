@@ -97,9 +97,11 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onLocationChanged(Location location) {
                         Log.d(TAG, "Got a location: " + location);
-                        //Log.d(TAG, "Location obtained from: " + location.getProvider());
-                        //latlong.setText("My coordinates: " + location.getLatitude() + "," + location.getLongitude());
-                        //locationVal.setText("I'm at " + useGeoCoder(location.getLatitude(), location.getLongitude()));
+                        Log.d(TAG, "Location obtained from: " + location.getProvider());
+                        latlong.setText("I'm at: " + location.getLatitude() + "," + location.getLongitude());
+
+                        locationVal.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+                        locationVal.setText("And for you human, that means I'm at " + useGeoCoder(location.getLatitude(), location.getLongitude()));
                     }
 
                 });
@@ -138,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
         geocoder = new Geocoder(this, Locale.getDefault());
 
         try {
+
             addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
 
             String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()

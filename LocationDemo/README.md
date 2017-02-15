@@ -56,4 +56,8 @@ Run and click the "Where am I" button. Every time you move, the **onLocationChan
 <h3> Using mock location in emulator </h3>
 Find a location using :link http://www.latlong.net/convert-address-to-lat-long.html
 
-Next open the Extended Controls on the emulator by pressing the ... option in the menu. Select Location and type in latitude and longitude and press Send. Then press the "Where am I" button; you should see that the **onLocationChanged** method was called. 
+Next open the Extended Controls on the emulator by pressing the ... option in the menu. Select Location and type in latitude and longitude and press Send. Then press the "Where am I" button; you should see that the **onLocationChanged** method was called.
+
+You can use the **GeoCoder** class to get the human-readable address from the location coordinates; this process is called reverse geocoding.
+
+<i> Exercise: Try using Places API to find the business at that location. 
