@@ -8,3 +8,6 @@ This repository contains all the Android apps used in CS342 lectures at Amherst 
 <li><b> Threads/DownloadDemo </b>: download and play a music file in a background thread. Lecture on threads, using Java (TestThread.java) and AsyncTask in Android, and how to connect to the Internet.  
 <li><b> ServiceDemo </b>: start a polling service that performs a task every one minute, and a receiver that listens for phone reboot. Lecture on Services and BroadcastReceiver.
 <li><b> LocationDemo </b>: get the current location. Lecture on location, play services and geocoding.
+<li><b> Map2Demo </b>: load a Google map in an activity, places markers and zooms in. Lecture on Maps.
+<li><b>JSONXMLAppDemo</b>: reads and writes JSON objects. Lecture on JSON.
+ 
