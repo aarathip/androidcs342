@@ -1,0 +1,24 @@
+[
+{
+"name":"Alice",
+"gradYear":2019,
+"courses":
+[
+{"name":"Mobile Computing",
+"num":342},
+{"name":"Theoretical Foundations",
+"num":401}
+]
+},
+{
+"name":"Bob",
+"gradYear":2018,
+"courses":
+[
+{"name":"Mobile Computing",
+"num":342},
+{"name":"Machine Learning",
+"num":247}
+]
+}
+]
