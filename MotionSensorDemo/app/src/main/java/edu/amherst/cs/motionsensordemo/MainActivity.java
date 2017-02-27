@@ -21,19 +21,19 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null)
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null)
+            mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
 //        List<Sensor> deviceSensors = mSensorManager.getSensorList(Sensor.TYPE_ALL);
-         // or given type: TYPE_GYROSCOPE, TYPE_LINEAR_ACCELERATION, or TYPE_GRAVITY
-
+//        //  or given type: TYPE_GYROSCOPE, TYPE_LINEAR_ACCELERATION, or TYPE_GRAVITY
+//
 //        for(int i=0; i<deviceSensors.size(); i++)
 //        {
 //            Log.d("MainActivity", deviceSensors.get(i).getStringType());
 //        }
 
-        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+         mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
         //default data delay (SENSOR_DELAY_NORMAL) is specified when the registerListener() method is invoked.
         // The data delay (or sampling rate) controls the interval at which sensor events are sent to your
         // application via the onSensorChanged() callback method. The default data delay is suitable for monitoring
@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         float z = event.values[2]; //Acceleration force along the z axis (including gravity).
 
         float accuracy = event.accuracy;
+
 
         Log.d("MainActivity", "x:" + x+", y:"+y+", z:"+z+", + acc:"+accuracy);
     }
