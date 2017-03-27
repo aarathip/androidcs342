@@ -1,14 +1,20 @@
 package edu.amherst.cs.motionsensordemo;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
@@ -20,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        verifyStoragePermissions(this);
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER) != null)
@@ -48,14 +56,37 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // the timestamp at which the data was generated, and the new data that the sensor recorded.
     public void onSensorChanged(SensorEvent event){
 
-        float x = event.values[0]; //Acceleration force along the x axis (including gravity).
-        float y = event.values[1]; //Acceleration force along the y axis (including gravity).
-        float z = event.values[2]; //Acceleration force along the z axis (including gravity).
+//        float x = event.values[0]; //Acceleration force along the x axis (including gravity).
+//        float y = event.values[1]; //Acceleration force along the y axis (including gravity).
+//        float z = event.values[2]; //Acceleration force along the z axis (including gravity).
+//
+//        float accuracy = event.accuracy;
+//
+//
+//        Log.d("MainActivity", "x:" + x+", y:"+y+", z:"+z+", + acc:"+accuracy);
 
-        float accuracy = event.accuracy;
 
 
-        Log.d("MainActivity", "x:" + x+", y:"+y+", z:"+z+", + acc:"+accuracy);
+        // In this example, alpha is calculated as t / (t + dT),
+        // where t is the low-pass filter's time-constant and
+        // dT is the event delivery rate.
+
+        float gravity[] = new float[3];
+        float linear_acceleration[] = new float[3];
+        final float alpha = 0.8f;
+
+        // Isolate the force of gravity with the low-pass filter.
+        gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
+        gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
+        gravity[2] = alpha * gravity[2] + (1 - alpha) * event.values[2];
+
+        // Remove the gravity contribution with the high-pass filter.
+        linear_acceleration[0] = event.values[0] - gravity[0];
+        linear_acceleration[1] = event.values[1] - gravity[1];
+        linear_acceleration[2] = event.values[2] - gravity[2];
+
+        FileUtil.writeToFile(linear_acceleration[0] +","+ linear_acceleration[1]+","+ linear_acceleration[2]);
+
     }
 
     //SENSOR_STATUS_ACCURACY_LOW, SENSOR_STATUS_ACCURACY_MEDIUM,
@@ -79,6 +110,36 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
+    }
+
+    // Storage Permissions variables
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
+    //persmission method.
+    public static void verifyStoragePermissions(Activity activity) {
+        // Check if we have read or write permission
+        int writePermission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int readPermission = ActivityCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE);
+
+        if (writePermission != PackageManager.PERMISSION_GRANTED || readPermission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    activity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
+
+
+    private String toTime()
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        return sdf.format(new Date());
     }
 
 
