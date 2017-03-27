@@ -1,0 +1,12 @@
+Student life is hectic! Papers, exams, assignments, book reports – a to-do list that keeps growing forever! There are several mobile apps that help you keep track of your tasks, but have you found a one that works for you? Suppose you could build the perfect app to keep track of your tasks, what would that look like?
+You already have the skills to make your perfect task organizer – you can create a custom list, view details of each item (Lab1), and add to a list (Practice exam). Now, you will explore how to remove an item from a list, as well as search for one.
+
+Amherst.Do
+Build an app Amherst.Do to organize your tasks. Here are the features I envision – view all tasks, add and edit a task, mark a task as completed, search for a task, sort tasks by due date, group tasks by categories, color-code by priority, add custom sounds to button clicks, and set alarms to remind them when duedate is approaching.
+
+Midterm
+For the midterm, you will build an app that provides some of the features, using the guidelines below. If you attempt something, but cannot complete it make sure you still add screenshots of your attempts, so you can get partial credit. I have attached a .apk file for you to try out – you can run it using the instructions in the Demo section below.
+[10 points] Create a custom list that displays tasks. For the exam, the task just needs to have a title, description and priority.
+[5 points] You can load the list in a manners of your choosing: by manually adding information to an ArrayList or reading from an existing file. For the exam, I do not expect you to add a feature to allow the user to create a new task or use an SQLite database in your app, you may add that later on if you wish to continue building this app.
+[15 points] Each item on the list contains a checkbox. Selecting the checkbox marks the task as done. This action could either remove the task from the list, or strike out the text. You must also add the task back to the task list, or unstrike it if the checkbox is unchecked.
+[20 points] Add a button that allows the user to search for a task and displays the tasks whose title or description matched the filter. Also add a second button to clear the search to display all tasks.
