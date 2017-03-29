@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +22,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager mSensorManager;
     private Sensor mSensor;
 
+
+    int sitEvent = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +88,24 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         linear_acceleration[1] = event.values[1] - gravity[1];
         linear_acceleration[2] = event.values[2] - gravity[2];
 
-        FileUtil.writeToFile(linear_acceleration[0] +","+ linear_acceleration[1]+","+ linear_acceleration[2]);
+        FileUtil.writeToFile(toTime()+","+linear_acceleration[0] +","+ linear_acceleration[1]+","+ linear_acceleration[2] + "," + sitEvent);
 
     }
+
+
+    public void start (View v)
+    {
+        //FileUtil.writeToFile("start");
+        sitEvent = 1;
+    }
+
+
+    public void stop (View v)
+    {
+        //FileUtil.writeToFile("stop");
+        sitEvent = 0;
+    }
+
 
     //SENSOR_STATUS_ACCURACY_LOW, SENSOR_STATUS_ACCURACY_MEDIUM,
     //SENSOR_STATUS_ACCURACY_HIGH, or SENSOR_STATUS_UNRELIABLE.
