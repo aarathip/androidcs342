@@ -1,6 +1,6 @@
 <h2>CS 342 Mobile Computing and Smart Sensing</h2>
 
-This repository contains all the Android apps used in CS342 lectures at Amherst College.
+This repository contains all the Android apps used in CS342 lectures at Amherst College in Spring 2017.
 
 <li><b> My Amherst</b>: reads dining hall menu from textfile and displays in a ListView. Lecture on Activites, Fragments, and ListViews with a simple ArrayAdapter and custom ArrayAdapter.
 <li><b> StudentSQLDemo </b>: adds student information to an SQL Database. Lecture on database read/write.
